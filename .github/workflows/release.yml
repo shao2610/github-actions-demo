@@ -25,7 +25,7 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         id: create_release
         with:
-          tag: ${{ github.ref }}
+       #   tag: ${{ github.ref }}
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
         # config-name: my-config.yml
         env:
