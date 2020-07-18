@@ -21,7 +21,7 @@ jobs:
           channel: 'stable'
 #      - run: flutter pub get
  #     - run: flutter build apk
-      - run: bash 1.sh
+      - run: bash build.sh
       - run: tar -czf build.tar.gz build/
      # - run: cp -r build/app/outputs/apk/release/app-release.apk app-release.apk
       - name: Create Release
