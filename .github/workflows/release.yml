@@ -1,0 +1,41 @@
+name: release
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.17.3'
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter build apk
+      - run: cp -r build/app/outputs/apk/release/app-release.apk app-release.apk
+      - uses: release-drafter/release-drafter@v5
+        id: create_release
+        with:
+          tag: ${{ github.ref }}
+        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+        # config-name: my-config.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Release normal Android
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./app-release.apk
+          asset_name: app-release.apk
+          asset_content_type: application/zip
