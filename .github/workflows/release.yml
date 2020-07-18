@@ -22,14 +22,16 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk
       - run: cp -r build/app/outputs/apk/release/app-release.apk app-release.apk
-      - uses: release-drafter/release-drafter@v5
+      - name: Create Release
         id: create_release
-        with:
-           tag: ${{ github.ref }}
-        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
-        # config-name: my-config.yml
+        uses: monkeyWie/create-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
       - name: Upload Release normal Android
         uses: actions/upload-release-asset@v1.0.1
         env:
