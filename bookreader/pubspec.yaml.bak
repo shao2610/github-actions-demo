@@ -1,10 +1,6 @@
-name: drinkshop
-description: A new Flutter project.
+name: bookreader
+description: A new Flutter application.
 
-
-environment:
-  sdk: ">=2.10.0 <3.0.0"
-  
 dependencies:
   flutter:
     sdk: flutter
@@ -29,24 +25,22 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  assets:
-    - assets/images/frappe.png
-    - assets/images/glass.png
-    - assets/images/frappe_with_straw.png
-    - assets/images/glass_with_straw.png
-
-  fonts:
-    - family: ionicons
-      fonts:
-        - asset: assets/fonts/ionicons.ttf
-    - family: fontello
-      fonts:
-        - asset: assets/fonts/fontello.ttf
-    
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
+
+  assets:
+    - assets/images/owl.png
+    - assets/images/book1.gif
+    - assets/images/book2.gif
+    - assets/images/book3.gif
+    - assets/images/book4.gif
+
+  fonts:
+    - family: Fontello
+      fonts:
+        - asset: assets/fonts/fontello.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
